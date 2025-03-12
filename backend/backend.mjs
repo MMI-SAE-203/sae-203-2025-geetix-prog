@@ -1,15 +1,12 @@
 import PocketBase from 'pocketbase' ;
 const pb = new PocketBase('http://127.0.0.1:8090') ;
 
-pb.autoCancellation(false);
-
 export function getDayName(dateString) {
     const date = new Date(dateString);
     const options = { weekday: 'long' };
     return date.toLocaleDateString('fr-FR', options);
   }
   
-  // Récupération de toutes les activités triées par date
   export async function allActiviteSorted() {
     try {
       const activites = await pb.collection('Activites').getFullList({
@@ -22,7 +19,6 @@ export function getDayName(dateString) {
     }
   }
   
-  // Grouper les activités par jour
   export async function getActivitiesByDay() {
     const activites = await allActiviteSorted();
     const activitesByDay = {};
@@ -43,7 +39,6 @@ export function getDayName(dateString) {
       activitesByDay[dayName].activities.push(activite);
     });
     
-    // Convertir l'objet en tableau pour faciliter l'utilisation dans Astro
     return Object.values(activitesByDay).sort((a, b) => new Date(a.date) - new Date(b.date));
   }
 
