@@ -1,11 +1,14 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import { FilmById } from "../../../backend/backend.mjs";
+import { ActeurReaById } from "../../../backend/backend.mjs";
 const { id } = Astro.params;
 const prop = await FilmById(id);
 if(!prop){
-    return Astro.redirect('/offres');
+    return Astro.redirect('/film');
 }
+
+const personne= await ActeurReaById(prop.invite);
 
 function formatDateHeure(dateString) {
   const date = new Date(dateString);
@@ -28,11 +31,15 @@ function formatDateHeure(dateString) {
 ---
 
 <Layout titre={prop.titre_film}>
-    <h1 class="font-aclonica text-purple ml-3 text-3xl mt-30">{prop.titre_film}</h1>
+    <h1 class="flex justify-center font-aclonica text-purple text-3xl mt-30">{prop.titre_film}</h1>
     <div class="mb-20 w-5/6 mx-auto">
         <div class="mt-10 flex flex-col items-center gap-4 lg:flex-row">
             <img class="mr-6 rounded-2xl w-1/2 lg:w-2/5" src={prop.imageUrl} alt={`Image de ${prop.titre_film}`} />
             <div class="mt-10 flex flex-col items-center gap-10 lg:items-start">
+                <div class="w-9/10 items-center flex flex-col lg:items-start pb-10">
+                    <p class="text-2xs font-comfortaa text-brown">Synopsis : </p>
+                    <p class="text-xl font-comfortaa text-brown">{prop.synopsis}</p>
+                </div>
                 <div class="text-center flex flex-col lg:items-start">
                     <p class="text-2xs font-comfortaa text-brown">De :</p>
                     <p class="text-xl font-comfortaa text-brown">{prop.realisateur}</p>
@@ -45,9 +52,9 @@ function formatDateHeure(dateString) {
                     <p class="text-2xs font-comfortaa text-brown">Date de projection : </p>
                     <p class="text-xl font-comfortaa text-brown">{formatDateHeure(prop.date_projection)}</p>
                 </div>
-                <div class="w-8/10 items-center flex flex-col lg:items-start pb-10">
-                    <p class="text-2xs font-comfortaa text-brown">Synopsis : </p>
-                    <p class="text-xl font-comfortaa text-brown">{prop.synopsis}</p>
+                <div class="text-center flex flex-col lg:items-start">
+                    <p class="text-2xs font-comfortaa text-brown">Invité : </p>
+                    <a href={`/invite/${item.id}`} class="text-xl font-comfortaa text-brown">{personne.prenom} {personne.nom}</a>
                 </div>
             </div>
         </div>

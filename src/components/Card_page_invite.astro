@@ -1,0 +1,9 @@
+---
+const {...item}=Astro.props;
+---
+
+<div class=" flex flex-wrap gap-2 justify-center mx-auto bg-brown p-4 rounded-lg shadow-lg w-64">
+    <img src={item.img} alt={item.nom} class="w-64 h-64 object-cover rounded" />
+    <p class="text-white font-comfortaa">{item.prenom} {item.nom}</p>
+    <a class="text-blue font-comfortaa" href={`/invite/${item.id}`}>En savoir plus</a>
+</div>

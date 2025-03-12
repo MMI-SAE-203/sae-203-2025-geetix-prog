@@ -64,10 +64,14 @@ export async function allActiviteSorted() {
 }
 
 export async function ActeurReaSorted() {
-    const record = await pb.collection("Invite").getFullList({
+    let record = await pb.collection("Invite").getFullList({
         filter: 'role = "acteur" || role = "realisateur"',
         sort: 'nom',
     });
+    record = record.map((invite) => {
+      invite.img = pb.files.getURL(invite, invite.photo);
+      return invite;
+  });
     return record ;
 }
 
@@ -90,7 +94,8 @@ export async function ActivitesById(id) {
 }
 
 export async function ActeurReaById(id) {
-    const record = await pb.collection("Invite").getOne(id);
+    let record = await pb.collection("Invite").getOne(id);
+    record.img = pb.files.getURL(record, record.photo);
     return record;
 }
 
