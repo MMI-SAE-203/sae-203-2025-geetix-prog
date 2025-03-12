@@ -1,0 +1,21 @@
+---
+const { dayName, activities } = Astro.props;
+---
+
+<div class="group relative mt-10 w-4/5 mx-auto card-container">
+    <div class="transform transition-transform duration-300 group-hover:scale-101 bg-purple rounded-4xl rounded-tr-4xl p-4 text-center card">
+        <h2 class="text-3xl capitalize text-blue font-aclonica">{dayName}</h2>
+        <div class="mt-2">
+            {activities.map(activity => (
+                <div class="py-2 border-b border-purple-300 last:border-0">
+                    <p class="font-comfortaa text-white-100">{activity.titre_act}</p>
+                </div>
+            ))}
+        </div>
+        <div class="text-blue hover:text-blue-300 mt-3">
+            <a href="/programme">
+                En savoir plus
+            </a>
+        </div>
+    </div>
+</div>

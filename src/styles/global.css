@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Coiny&family=MonteCarlo&family=Pacifico&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Aclonica&family=Coiny&family=MonteCarlo&family=Pacifico&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Aclonica&family=Coiny&family=Comfortaa:wght@300..700&family=MonteCarlo&family=Pacifico&display=swap');
 
 @import "tailwindcss";
 
@@ -13,4 +14,5 @@
     --color-white-100: #F1E8D9;
     --font-coiny: 'Coiny', cursive;
     --font-aclonica: 'Aclonica', sans-serif;
+    --font-comfortaa: 'Comfortaa', cursive;
 }

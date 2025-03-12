@@ -1,17 +1,95 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
+import Line from "../assets/icons/line.svg";
+import Cercle from "../assets/icons/cercle.svg";
+import Forme from "../assets/icons/ellipse13.svg";
+import Card from "../components/Card.astro";
+
+import { getActivitiesByDay } from "../../backend/backend.mjs";
+const activitiesByDay = await getActivitiesByDay();
+
+// Filtrer pour n'avoir que les activités futures
+const futureActivities = activitiesByDay.filter(dayGroup => {
+    const date = new Date(dayGroup.date);
+    const today = new Date();
+    return date >= today;
+});
 ---
 
 <Layout>
-	<div class="bg-orange-100 rounded-tl-4xl rounded-tr-4xl">
+	<div class="bg-orange-100 rounded-tl-4xl rounded-tr-4xl h-150 lg:h-110">
+		<div class="absolute">
+			<Line />
+		</div>
 		<div class="pt-10 mt-30">
-			<h2 class="text-4xl text-center font-aclonica text-purple">Présentation</h2>
+			<h2 class="text-4xl text-center font-aclonica text-purple">
+				Présentation
+			</h2>
 			<div class="*:w-60 *:h-4 *:bg-pink *:mx-auto *:rounded-full">
 				<div></div>
 			</div>
 		</div>
-		<p>
-			Le « Festival Miaullywood » allie cinéma et ambiance féline pour sensibiliser à la maltraitance animale et promouvoir des réalisateurs émergents. Accessible en réalité virtuelle, il propose conférences, ateliers, projections en plein air et un musée retraçant l’histoire des chats.
+		<p class="font-comforta text-l w-5/6 m-auto pt-10 text-brown p-4">
+			Le « Festival Miaullywood » allie cinéma et ambiance féline pour
+			sensibiliser à la maltraitance animale et promouvoir des
+			réalisateurs émergents. Accessible en réalité virtuelle, il propose
+			conférences, ateliers, projections en plein air et un musée
+			retraçant l’histoire des chats.
 		</p>
+		<p class="font-comforta text-l w-5/6 m-auto pt-5 text-brown p-4">
+			Destiné à un public large, notamment les 18-35 ans, il se tiendra à
+			Pontarlier, avec le cinéma Olympia comme lieu central, offrant un
+			cadre mêlant nature et culture.
+		</p>
+		<Cercle class="absolute right-0" />
+		<div class="mt-15">
+			<a href="/programme" class="ml-7 text-pink lg:ml-40"
+				>Cliquez pour en savoir plus</a
+			>
+		</div>
+
+		<div class="bg-orange rounded-tl-4xl rounded-tr-4xl mt-10">
+			<div class="pt-10">
+				<h2 class="text-4xl text-center font-aclonica text-purple">
+					Programme
+				</h2>
+				<div class="*:w-60 *:h-4 *:bg-blue *:mx-auto *:rounded-full">
+					<div></div>
+				</div>
+			</div>
+			<div class="lg:flex lg:grid-cols-3 lg:gap-4 lg:mx-10 lg:mt-10">
+				{futureActivities.length > 0 ? (
+					futureActivities.map((dayGroup) => (
+						<Card dayName={dayGroup.dayName} activities={dayGroup.activities} />
+					))
+				) : (
+					<p class="text-center">
+						Aucune activité disponible pour le moment.
+					</p>
+				)}
+			</div>
+			<div class="mt-35 text-center">
+				<a href="/programme" class="text-white-100 bg-purple px-2 py-1 rounded-full">
+					Cliquez pour en savoir plus
+				</a>
+				<div class="-mt-40 flex justify-end">
+					<Forme class=""/>
+				</div>
+			</div>
+		</div>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
 	</div>
 </Layout>

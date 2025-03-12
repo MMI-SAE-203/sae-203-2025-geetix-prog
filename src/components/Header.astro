@@ -2,85 +2,130 @@
 import LogoHeader from "../assets/icons/paw.svg";
 ---
 
-<header id="header" class="flex justify-between items-center p-4 pr-10 fixed top-0 bg-transparent w-full z-50 lg:justify-between transition-transform duration-300">
+<header
+  id="header"
+  class="flex justify-between items-center pt-5 pr-10 fixed bg-white-100/75 top-0 w-full z-50 lg:justify-between transition-transform duration-300 lg:pr-0"
+>
   <a href="/" aria-label="Accueil">
     <LogoHeader />
   </a>
-  <a href="/" aria-label="Accueil"><h1 class="text-pink font-coiny text-2xl">Miaullywood</h1></a>
+  <a href="/" aria-label="Accueil"
+    ><h1 class="text-pink font-coiny text-2xl">Miaullywood</h1></a
+  >
   <button
-    class="relative z-10 flex h-4 w-6 flex-col justify-between *:h-[3px] *:w-full *:bg-pink *:transition-all *:duration-300 *:ease *:rounded-xl lg:hidden"
     id="menu-btn"
+    class="group relative z-10 flex h-5 w-7 flex-col justify-between *:block *:ease *:h-1 *:w-full *:transform *:rounded-full *:bg-pink *:transition *:duration-300 lg:hidden"
     aria-label="Menu"
     aria-controls="menu"
-    >
-    <div></div>
-    <div></div>
-    <div></div>
+    aria-expanded="false"
+  >
+    <span
+      class="group-aria-expanded:translate-y-[4px] group-aria-expanded:rotate-45"
+    ></span>
+    <span
+      class="group-aria-expanded:-translate-y-[4px] group-aria-expanded:-rotate-45"
+    ></span>
+    <span
+      class="group-aria-expanded:opacity-0 group-aria-expanded:invisible"
+    ></span>
+    
   </button>
+
   <nav
     id="menu"
-    class="flex-1 px-6 py-12 flex justify-between mt-20 flex-col fixed z-10 inset-0 bg-white-100 visible opacity-100 max-lg:aria-hidden:invisible max-lg:aria-hidden:opacity-0 lg:static lg:bg-transparent lg:flex-row lg:py-6 lg:mt-0 lg:justify-center"
+    class="flex-1 px-6 py-12 flex justify-between mt-20 flex-col fixed z-10 inset-0 bg-white-100 visible opacity-100 max-lg:aria-hidden:invisible max-lg:aria-hidden:opacity-0 lg:static lg:bg-transparent lg:flex-row lg:py-6 lg:mt-0 lg:justify-between lg:items-center lg:gap-4 lg:visible lg:opacity-100 lg:transform-none lg:aria-hidden:lg:"
     aria-hidden="true"
   >
-    <ul class="flex flex-col gap-4 lg:flex-row">
-    <li>
-      <a class="block p-4 rounded-lg text-pink font-aclonica lg:text-sm hover:scale-110" href="/">Accueil</a>
-    </li>
-    <li>
-      <a class="block p-4 rounded-lg text-pink font-aclonica lg:text-sm hover:scale-110" href="/buy">Programme</a>
-    </li>
-    <li>
-      <a class="block p-4 rounded-lg text-pink font-aclonica lg:text-sm hover:scale-110" href="/sell">À propos</a>
-    </li>
-    <li>
-      <a class="block p-4 rounded-lg text-pink font-aclonica lg:text-sm hover:scale-110" href="/manage">Contact</a>
-    </li>
-    <li>
-      <a class="block p-4 rounded-lg text-pink font-aclonica lg:text-sm hover:scale-110" href="/resources">Films</a>
-    </li>
-    <li>
-      <a class="block p-4 rounded-lg text-pink font-aclonica lg:text-sm hover:scale-110" href="/resources">Invités</a>
-    </li>
-    <li>
-      <a class="block p-4 rounded-lg text-pink font-aclonica lg:text-sm hover:scale-110" href="/resources">Infos pratiques</a>
-    </li>
-    </ul>
-    <div class="flex items-center justify-center gap-4 px-4">
-    <a href="/login" class="inline-flex items-center gap-2 text-pink border-2 font-bold rounded-lg transition duration-300 ease-in-out px-6 py-2.5 text-base border-pink hover:bg-pink hover:text-white">Login</a>
-    <a href="/signup" class="inline-flex items-center gap-2 font-bold rounded-lg transition duration-300 ease-in-out px-6 py-3 text-base bg-pink text-white hover:bg-pink-700">Sign Up</a>
+    <div class="lg:mx-auto">
+      <ul class="flex flex-col gap-4 lg:flex-row">
+        <li>
+          <a
+            class="block p-2 rounded-lg text-pink font-aclonica lg:text-sm hover:scale-110"
+            href="/">Accueil</a
+          >
+        </li>
+        <li>
+          <a
+            class="block p-2 rounded-lg text-pink font-aclonica lg:text-sm hover:scale-110"
+            href="/buy">Programme</a
+          >
+        </li>
+        <li>
+          <a
+            class="block p-2 rounded-lg text-pink font-aclonica lg:text-sm hover:scale-110"
+            href="/sell">À propos</a
+          >
+        </li>
+        <li>
+          <a
+            class="block p-2 rounded-lg text-pink font-aclonica lg:text-sm hover:scale-110"
+            href="/manage">Contact</a
+          >
+        </li>
+        <li>
+          <a
+            class="block p-2 rounded-lg text-pink font-aclonica lg:text-sm hover:scale-110"
+            href="/resources">Films</a
+          >
+        </li>
+        <li>
+          <a
+            class="block p-2 rounded-lg text-pink font-aclonica lg:text-sm hover:scale-110"
+            href="/resources">Invités</a
+          >
+        </li>
+        <li>
+          <a
+            class="block p-2 rounded-lg text-pink font-aclonica lg:text-sm hover:scale-110"
+            href="/resources">Infos pratiques</a
+          >
+        </li>
+      </ul>
+    </div>
+    <div class="flex items-center justify-center gap-4 px-4 lg:mr-0 lg:pr-0">
+      <a
+        href="/login"
+        class="inline-flex items-center gap-2 text-pink border-2 font-bold rounded-lg transition duration-300 ease-in-out px-3 py-1 text-base border-pink hover:bg-pink hover:text-white"
+        >Connexion</a
+      >
+      <a
+        href="/signup"
+        class="inline-flex items-center gap-2 font-bold rounded-lg transition duration-300 ease-in-out px-3 py-1.5 text-base bg-pink text-white hover:bg-pink-700"
+        >Inscription</a
+      >
     </div>
   </nav>
 </header>
 
 <script>
-  // On cible les éléments à modifier
   const toggle = document.querySelector("#menu-btn");
   const nav = document.querySelector("#menu");
   const page = document.body;
   const header = document.querySelector("#header");
 
-  // Vérifier si les éléments existent avant d'ajouter l'événement
   if (toggle && nav) {
-  toggle.addEventListener("click", () => {
-    const isOpen = toggle.ariaExpanded === "true";
-    const isClosed = !isOpen;
-    // Mise à jour des attributs ARIA pour accessibilité
-    toggle.ariaExpanded = String(isClosed);
-    nav.ariaHidden = String(isOpen);
-    page.classList.toggle("noscroll", isClosed);
-  });
+    toggle.addEventListener("click", () => {
+      const isOpen = toggle.ariaExpanded === "true";
+      const isClosed = !isOpen;
+      // Mise à jour des attributs ARIA pour accessibilité
+      toggle.ariaExpanded = String(isClosed);
+      nav.ariaHidden = String(isOpen);
+      page.classList.toggle("noscroll", isClosed);
+    });
   }
 
   let lastScrollY = window.scrollY;
 
   window.addEventListener("scroll", () => {
-  if (window.scrollY > lastScrollY) {
-    // Scrolling down
-    header.style.transform = "translateY(-100%)";
-  } else {
-    // Scrolling up
-    header.style.transform = "translateY(0)";
-  }
-  lastScrollY = window.scrollY;
+    if (window.scrollY > lastScrollY) {
+      header.style.transform = "translateY(-100%)";
+    } else {
+      header.style.transform = "translateY(0)";
+    }
+    lastScrollY = window.scrollY;
   });
+
+  const noscroll = document.createElement('style');
+  noscroll.innerHTML = 'body.noscroll { overflow: hidden; }';
+  document.head.appendChild(noscroll);
 </script>
