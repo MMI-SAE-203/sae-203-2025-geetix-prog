@@ -42,9 +42,20 @@ export function getDayName(dateString) {
     return Object.values(activitesByDay).sort((a, b) => new Date(a.date) - new Date(b.date));
   }
 
-export async function allFilmSorted() {
-    const record = await pb.collection("Film").getFullList({sort: 'date_projection',}) ;
-    return record ;
+  export async function allFilmSorted() {
+    try {
+        let record = await pb.collection('Film').getFullList({
+            sort: 'date_projection',
+        });
+        record = record.map((film) => {
+            film.img = pb.files.getURL(film, film.affiche_film);
+            return film;
+        });
+        return record;
+    } catch (error) {
+        console.log('Une erreur est survenue en lisant la liste des films', error);
+        return [];
+    }
 }
 
 export async function allActiviteSorted() {

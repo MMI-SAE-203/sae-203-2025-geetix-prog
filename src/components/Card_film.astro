@@ -1,0 +1,36 @@
+---
+const {...item}=Astro.props;
+
+// Dans la partie frontmatter, créez une fonction utilitaire
+function formatDateHeure(dateString) {
+  const date = new Date(dateString);
+  
+  // Soustraire 2 heures pour corriger le décalage
+  date.setHours(date.getHours() - 2);
+  
+  const jourDate = date.toLocaleDateString('fr-FR', { 
+    weekday: 'long', 
+    day: 'numeric', 
+    month: 'long' 
+  });
+  
+  const heure = date.toLocaleTimeString('fr-FR', { 
+    hour: '2-digit', 
+    minute: '2-digit' 
+  });
+  
+  return `${jourDate} - ${heure}`;
+}
+---
+
+<div class="mx-auto flex flex-col items-center justify-center gap-4 p-4 bg-brown rounded-lg shadow-lg w-64">
+    <img src={item.img} alt={item.titre_film} class="w-64 h-64 object-cover rounded" />
+    <h2 class="text-s font-comfortaa font-bold text-white-100">{item.titre_film}</h2>
+    <p class="pt-3 text-xs font-comfortaa text-white-100">{formatDateHeure(item.date_projection)}</p>
+    <div>
+        <p class="pt-3 text-xs font-comfortaa text-white-100">De {item.realisateur}</p>
+    </div>
+    <div class="flex justify-end">
+        <a href={`/film/${item.id}`} class="text-purple">Voir plus →</a>
+    </div>
+</div>
