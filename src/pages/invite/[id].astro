@@ -1,8 +1,10 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import { ActeurReaById } from "../../../backend/backend.mjs";
+import { FilmById } from "../../../backend/backend.mjs";
 const { id } = Astro.params;
 const personne = await ActeurReaById(id);
+const film = await FilmById(personne.film_associe);
 if(!personne){
     return Astro.redirect('/invite');
 }
@@ -25,6 +27,10 @@ if(!personne){
                 <div class="text-center flex flex-col lg:items-start">
                     <p class="text-2xs font-comfortaa text-brown">Date de projection : </p>
                     <p class="text-xl font-comfortaa text-brown">{personne.role}</p>
+                </div>
+                <div class="text-center flex flex-col lg:items-start">
+                    <p class="text-2xs font-comfortaa text-brown">Participe dans : </p>
+                    <a href={`/film/${film.id}`} class="text-xl font-comfortaa text-pink">{film.titre_film}</a>
                 </div>
             </div>
         </div>

@@ -53,8 +53,8 @@ function formatDateHeure(dateString) {
                     <p class="text-xl font-comfortaa text-brown">{formatDateHeure(prop.date_projection)}</p>
                 </div>
                 <div class="text-center flex flex-col lg:items-start">
-                    <p class="text-2xs font-comfortaa text-brown">Invité : </p>
-                    <a href={`/invite/${item.id}`} class="text-xl font-comfortaa text-brown">{personne.prenom} {personne.nom}</a>
+                    <p class="text-2xs font-comfortaa text-brown">Invité(e) : </p>
+                    <a href={`/invite/${personne.id}`} class="text-xl font-comfortaa text-pink lg:hover:text-pink-500">{personne.prenom} {personne.nom}</a>
                 </div>
             </div>
         </div>
