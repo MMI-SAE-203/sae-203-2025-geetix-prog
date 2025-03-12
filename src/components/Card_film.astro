@@ -1,11 +1,9 @@
 ---
 const {...item}=Astro.props;
 
-// Dans la partie frontmatter, créez une fonction utilitaire
 function formatDateHeure(dateString) {
   const date = new Date(dateString);
   
-  // Soustraire 2 heures pour corriger le décalage
   date.setHours(date.getHours() - 2);
   
   const jourDate = date.toLocaleDateString('fr-FR', { 

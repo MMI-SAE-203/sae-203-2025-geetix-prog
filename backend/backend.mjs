@@ -42,20 +42,20 @@ export function getDayName(dateString) {
     return Object.values(activitesByDay).sort((a, b) => new Date(a.date) - new Date(b.date));
   }
 
-  export async function allFilmSorted() {
-    try {
-        let record = await pb.collection('Film').getFullList({
-            sort: 'date_projection',
-        });
-        record = record.map((film) => {
-            film.img = pb.files.getURL(film, film.affiche_film);
-            return film;
-        });
-        return record;
-    } catch (error) {
-        console.log('Une erreur est survenue en lisant la liste des films', error);
-        return [];
-    }
+export async function allFilmSorted() {
+  try {
+      let record = await pb.collection('Film').getFullList({
+          sort: 'date_projection',
+      });
+      record = record.map((film) => {
+          film.img = pb.files.getURL(film, film.affiche_film);
+          return film;
+      });
+      return record;
+  } catch (error) {
+      console.log('Une erreur est survenue en lisant la liste des films', error);
+      return [];
+  }
 }
 
 export async function allActiviteSorted() {
@@ -71,9 +71,17 @@ export async function ActeurReaSorted() {
     return record ;
 }
 
+
+
 export async function FilmById(id) {
-    const record = await pb.collection("Film").getOne(id) ;
-    return record ;
+  try {
+      let data = await pb.collection('Film').getOne(id);
+      data.imageUrl = pb.files.getURL(data, data.affiche_film);
+      return data;
+  } catch (error) {
+      console.log('Une erreur est survenue en lisant la maison', error);
+      return null;
+  }
 }
 
 export async function ActivitesById(id) {
@@ -112,5 +120,20 @@ export async function UpdateActivite(id, data) {
 
 export async function UpdateInvite(id, data) {
     const record = await pb.collection("Invite").update(id, data);
+    return record;
+}
+
+export async function addFilm(data) {
+    const record = await pb.collection("Film").create(data) ;
+    return record ;
+}
+
+export async function addActivite(data) {
+    const record = await pb.collection("Activites").create(data) ;
+    return record ;
+}
+
+export async function addInvite(data) {
+    const record = await pb.collection("Invite").create(data);
     return record;
 }

@@ -10,10 +10,13 @@ const films = await allFilmSorted();
 ---
 
 <Layout>
-    <div class="mt-30">
+    <div class="mt-30 mb-15">
         <h1 class="font-aclonica text-purple ml-3 text-3xl">Listes des films en compétitions :</h1>
         <div class="mt-10 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 mb-20">
             {films.map((item) => <Card_film {...item} />)}
+        </div>
+        <div class="items-center flex justify-center">
+            <a class="bg-purple lg:hover:bg-purple-500 lg:transition text-white-100 px-2 py-3 rounded-full" href="film/add">Ajouter un film</a>
         </div>
     </div>
 </Layout>
