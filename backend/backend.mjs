@@ -75,7 +75,10 @@ export async function ActeurReaSorted() {
     return record ;
 }
 
-
+export async function allFestival() {
+    const record = await pb.collection("Festival").getFullList() ;
+    return record ;
+}
 
 export async function FilmById(id) {
   try {
