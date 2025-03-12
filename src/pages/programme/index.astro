@@ -1,0 +1,31 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Card from "../../components/Card_programme.astro";
+
+import {getActivitiesByDay} from "../../../backend/backend.mjs";
+
+const activitiesByDay = await getActivitiesByDay();
+
+const futureActivities = activitiesByDay.filter(dayGroup => {
+    const date = new Date(dayGroup.date);
+    const today = new Date();
+    return date >= today;
+});
+---
+
+<Layout>
+    <div class="ml-10 mt-40 mb-15">
+        <h1 class="font-aclonica text-purple ml-3 text-3xl">Listes du programme d'activité du festival :</h1>
+        <div class="mt-10 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 mb-20">
+            <div class="lg:flex lg:grid-cols-3 lg:gap-4 lg:mx-10 lg:mt-10">
+				{futureActivities.length > 0 ? (
+					futureActivities.map((dayGroup) => (
+						<Card dayName={dayGroup.dayName} activities={dayGroup.activities} />
+					))
+				) : (
+					<p class="text-center">
+						Aucune activité disponible pour le moment.
+					</p>
+				)}
+    </div>
+</Layout>
