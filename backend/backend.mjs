@@ -22,7 +22,6 @@ export function getDayName(dateString) {
   export async function getActivitiesByDay() {
     const activites = await allActiviteSorted();
     const activitesByDay = {};
-    
     activites.forEach(activite => {
       const date = new Date(activite.date);
       const dateKey = date.toISOString().split('T')[0]; // Format YYYY-MM-DD
@@ -34,8 +33,7 @@ export function getDayName(dateString) {
           date: dateKey,
           activities: []
         };
-      }
-      
+      } 
       activitesByDay[dayName].activities.push(activite);
     });
     
@@ -56,11 +54,6 @@ export async function allFilmSorted() {
       console.log('Une erreur est survenue en lisant la liste des films', error);
       return [];
   }
-}
-
-export async function allActiviteSorted() {
-    const record = await pb.collection("Activites").getFullList({sort: 'date',}) ;
-    return record ;
 }
 
 export async function ActeurReaSorted() {

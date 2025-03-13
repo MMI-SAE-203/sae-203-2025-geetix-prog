@@ -43,6 +43,19 @@ function formatDateHeure(dateString) {
         <div class="mt-10 flex flex-col items-center gap-4 lg:flex-row">
             <img class="mr-6 rounded-2xl w-1/2 lg:w-2/5" src={prop.imageUrl} alt={`Image de ${prop.titre_film}`} />
             <div class="mt-10 flex flex-col items-center gap-10 lg:items-start">
+            {
+                prop.bandeannonce && (
+                  <div class="mt-6 p-4 rounded-lg">
+                    <iframe
+                      class="mt-4 rounded-lg shadow-md w-full h-64 lg:h-50"
+                      src={prop.bandeannonce.replace("watch?v=", "embed/")}
+                      frameborder="0"
+                      allow="autoplay; encrypted-media"
+                      allowfullscreen
+                    ></iframe>
+                  </div>
+                )
+              }
                 <div class="w-9/10 items-center flex flex-col lg:items-start">
                     <p class="text-2xs font-comfortaa text-brown">Synopsis : </p>
                     <p class="text-xl font-comfortaa text-brown">{prop.synopsis}</p>

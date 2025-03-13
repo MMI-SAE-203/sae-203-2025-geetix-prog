@@ -5,6 +5,7 @@ import Cercle from "../assets/icons/cercle.svg";
 import Forme from "../assets/icons/ellipse13.svg";
 import Card from "../components/Card_prog.astro";
 import Card2 from "../components/Card_invite.astro";
+import Carousel from "../components/Carousel.astro";
 
 import { ActeurReaSorted, getActivitiesByDay } from "../../backend/backend.mjs";
 
@@ -60,16 +61,8 @@ const futureActivities = activitiesByDay.filter(dayGroup => {
 					<div></div>
 				</div>
 			</div>
-			<div class="lg:flex lg:grid-cols-3 lg:gap-4 lg:mx-10 lg:mt-10">
-				{futureActivities.length > 0 ? (
-					futureActivities.map((dayGroup) => (
-						<Card dayName={dayGroup.dayName} activities={dayGroup.activities} />
-					))
-				) : (
-					<p class="text-center">
-						Aucune activité disponible pour le moment.
-					</p>
-				)}
+			<div class="lg:flex lg:justify-center lg:grid-cols-3 lg:gap-4 lg:mx-10 lg:mt-10">
+				<Carousel class="" activities={activitiesByDay}/>
 			</div>
 			<div class="mt-35 text-center">
 				<a href="/programme" class="text-white-100 bg-purple px-2 py-1 rounded-full">
