@@ -15,5 +15,8 @@ const invite = await ActeurReaSorted();
         <div class="mt-10 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 mb-20">
             {invite.map((item) => <Card_page_invite {...item} />)}
         </div>
+        <div class="items-center flex justify-center">
+            <a class="bg-purple lg:hover:bg-purple-500 lg:transition text-white-100 px-2 py-3 rounded-full" href="invite/add">Ajouter un invité</a>
+        </div>
     </div>
 </Layout>
