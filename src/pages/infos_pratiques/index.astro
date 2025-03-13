@@ -29,7 +29,39 @@ const reduc=festivalData.prix_billet-reduction;
         </div>
         <div class="mt-10 bg-white shadow-md rounded px-8 pt-6 pb-8 container w-11/12 mx-auto">
             <h2 class="lg:ml-25 font-aclonica text-pink ml-10 text-2xl">FAQ :</h2>
-            
+            <div class="mt-5">
+                <div class="border-b border-gray-200">
+                    <button class="w-full text-left py-4 font-comfortaa text-brown focus:outline-none" onclick="toggleAccordion('faq1')">
+                        <span>Question 1: What is the festival about?</span>
+                    </button>
+                    <div id="faq1" class="hidden pl-4">
+                        <p class="py-2">Answer: The festival is about...</p>
+                    </div>
+                </div>
+                <div class="border-b border-gray-200">
+                    <button class="w-full text-left py-4 font-comfortaa text-brown focus:outline-none" onclick="toggleAccordion('faq2')">
+                        <span>Question 2: How can I buy tickets?</span>
+                    </button>
+                    <div id="faq2" class="hidden pl-4">
+                        <p class="py-2">Answer: You can buy tickets by...</p>
+                    </div>
+                </div>
+                <div class="border-b border-gray-200">
+                    <button class="w-full text-left py-4 font-comfortaa text-brown focus:outline-none" onclick="toggleAccordion('faq3')">
+                        <span>Question 3: Are there any discounts available?</span>
+                    </button>
+                    <div id="faq3" class="hidden pl-4">
+                        <p class="py-2">Answer: Yes, there are discounts for...</p>
+                    </div>
+                </div>
+            </div>
         </div>
+
+        <script>
+            function toggleAccordion(id) {
+                const element = document.getElementById(id);
+                element.classList.toggle('hidden');
+            }
+        </script>
     </div>
 </Layout>
