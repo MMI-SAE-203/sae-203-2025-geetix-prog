@@ -1,0 +1,38 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { ActeurReaById } from "../../../backend/backend.mjs";
+import { FilmById } from "../../../backend/backend.mjs";
+const { id } = Astro.params;
+const personne = await ActeurReaById(id);
+const film = await FilmById(personne.film_associe);
+if(!personne){
+    return Astro.redirect('/invite');
+}
+---
+
+<Layout titre={personne.nom}>
+    <h1 class="flex justify-center font-aclonica text-purple text-3xl mt-30">{personne.prenom} {personne.nom}</h1>
+    <div class="mb-20 w-5/6 mx-auto">
+        <div class="mt-10 flex flex-col items-center gap-4 lg:flex-row">
+            <img class="rounded-2xl w-1/2 lg:w-2/5" src={personne.img} alt={`Image de ${personne.nom}`} />
+            <div class="mt-10 flex flex-col items-center gap-10 lg:items-start">
+                <div class="text-start flex flex-col lg:items-start">
+                    <p class="text-2xs font-comfortaa text-brown">Biographie :</p>
+                    <p class="text-xl font-comfortaa text-brown">{personne.biographie}</p>
+                </div>
+                <div class="text-center flex flex-col lg:items-start">
+                    <p class="text-2xs font-comfortaa text-brown">Email :</p>
+                    <p class="text-xl font-comfortaa text-brown">{personne.email}</p>
+                </div>
+                <div class="text-center flex flex-col lg:items-start">
+                    <p class="text-2xs font-comfortaa text-brown">Date de projection : </p>
+                    <p class="text-xl font-comfortaa text-brown">{personne.role}</p>
+                </div>
+                <div class="text-center flex flex-col lg:items-start">
+                    <p class="text-2xs font-comfortaa text-brown">Participe dans : </p>
+                    <a href={`/film/${film.id}`} class="text-xl font-comfortaa text-pink lg:hover:text-pink-500">{film.titre_film}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</Layout>

@@ -1,0 +1,120 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { allFestival } from "../../../backend/backend.mjs";
+const festi = await allFestival();
+// Le problème est probablement ici - allFestival() renvoie probablement un tableau
+// Si c'est le premier festival que vous voulez afficher, vous devriez accéder à festi[0]
+const festivalData = Array.isArray(festi) ? festi[0] : festi;
+const reduction = festivalData.prix_billet * (festivalData.reduc_etu / 100);
+const reduc = festivalData.prix_billet - reduction;
+---
+
+<Layout>
+    <div class="mt-40 mb-15">
+        <h1 class="lg:ml-10 font-aclonica text-purple ml-3 text-2xl lg:text-3xl">
+            Infos pratiques :
+        </h1>
+        <div
+            class="mt-10 bg-white shadow-md rounded px-8 pt-6 pb-8 container w-11/12 mx-auto"
+        >
+            <h2 class="lg:ml-25 font-aclonica text-pink ml-10 text-2xl">
+                Tarifs :
+            </h2>
+            <div class="font-comfortaa text-brown mt-5">
+                <p class="lg:ml-25 ml-15">
+                    Tarif normal : {festivalData.prix_billet}€
+                </p>
+                <p class="lg:ml-25 ml-15">Tarif étudiant : {reduc}€</p>
+                <p class="lg:ml-25 ml-15">
+                    Abonnement : {festivalData.abonnement} € /mois
+                </p>
+            </div>
+        </div>
+        <div
+            class="mt-10 bg-white shadow-md rounded px-8 pt-6 pb-8 container w-11/12 mx-auto"
+        >
+            <h2 class="lg:ml-25 font-aclonica text-pink ml-10 text-2xl">
+                Lieu :
+            </h2>
+            <div>
+                <iframe
+                    class="w-9/10 mt-10 mx-auto rounded-4xl"
+                    src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d5451.833664421554!2d6.358482!3d46.904354!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x478dbcc13a4f5b1f%3A0x45cbd7a0ca4c890e!2s1945%20Rue%20de%20Morteau%2C%2025300%20Pontarlier!5e0!3m2!1sfr!2sfr!4v1741771029245!5m2!1sfr!2sfr"
+                    width="600"
+                    height="450"
+                    style="border:0;"
+                    allowfullscreen=""
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <p class="font-comfortaa text-pink text-xs text-center mt-5">
+                    1945 Rue de Morteau, 25300 Pontarlier
+                </p>
+            </div>
+        </div>
+        <div
+            x-data="{ openTab: null }"
+            class="mt-10 bg-white shadow-md rounded px-8 pt-6 pb-8 container w-11/12 mx-auto space-y-4"
+        >
+        <h2 class="lg:ml-25 font-aclonica text-pink ml-10 text-2xl">
+            FAQ :
+        </h2>
+            <div class="border mt-10  border-pink rounded-lg w-8/12 mx-auto">
+                <button
+                    @click="openTab === 1 ? openTab = null : openTab = 1"
+                    class="w-full flex justify-between items-center p-4 text-left bg-blanc hover:bg-blue/15 transition cursor-pointer"
+                >
+                    <h3 class="text-pink font-comfortaa">
+                        Que puis-je apporter au festival ?
+                    </h3>
+                    <span class="text-pink" x-show="openTab !== 1">+</span>
+                    <span class="text-pink" x-show="openTab === 1">−</span>
+                </button>
+                <p class="mx-10 text-pink font-comfortaa" x-show="openTab === 1" x-collapse class="p-4">
+                    Vous êtes libres d’apporter votre plaid ou chaise pliante
+                    pour plus de confort lors des projections en plein air.
+                    Cependant, les bouteilles en plastique et contenants
+                    jetables ne sont pas autorisés afin de limiter les déchets.
+                </p>
+            </div>
+            <div class="border border-pink rounded-lg w-8/12 mx-auto">
+                <button
+                    @click="openTab === 2 ? openTab = null : openTab = 2"
+                    class="w-full flex justify-between items-center p-4 text-left bg-blanc hover:bg-blue/15 transition lg:cursor-pointer"
+                >
+                    <h3 class="text-pink font-comfortaa">
+                        Y a-t-il des options de restauration ?
+                    </h3>
+                    <span class="text-pink" x-show="openTab !== 2">+</span>
+                    <span class="text-pink" x-show="openTab === 2">−</span>
+                </button>
+                <p class="mx-10 text-pink font-comfortaa" x-show="openTab === 2" x-collapse class="p-4">
+                    Oui, le festival propose plusieurs stands de restauration
+                    mettant en avant des produits locaux, bio et végétariens.
+                    Pensez à apporter vos propres contenants pour profiter des
+                    réductions zéro déchet !
+                </p>
+            </div>
+            <div class="border border-pink rounded-lg w-8/12 mx-auto">
+                <button
+                    @click="openTab === 3 ? openTab = null : openTab = 3"
+                    class="w-full flex justify-between items-center p-4 text-left hover:bg-blue/15 transition cursor-pointer"
+                >
+                    <h3 class="text-pink font-comfortaa">
+                        Que faire en cas de mauvais temps ?
+                    </h3>
+                    <span class="text-pink" x-show="openTab !== 3">+</span>
+                    <span class="text-pink" x-show="openTab === 3">−</span>
+                </button>
+                <p class="mx-10 text-pink font-comfortaa" x-show="openTab === 3" x-collapse class="p-4">
+                    Le festival aura lieu quelles que soient les conditions
+                    météo. Des espaces couverts seront disponibles pour les
+                    projections en cas de pluie.
+                </p>
+            </div>
+        </div>
+    </div>
+</Layout>
+
+<script
+defer
+src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
