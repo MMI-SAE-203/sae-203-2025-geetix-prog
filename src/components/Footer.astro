@@ -2,9 +2,15 @@
 import Insta from '../assets/icons/instagram.svg'
 import Face from '../assets/icons/facebook.svg'
 import Twit from '../assets/icons/twitter.svg'
+import Top from '../assets/icons/top.svg'
 ---
 
 <footer class="bg-brown text-center pt-15 pb-10">
+    <div id="scrollTopContainer" class="fixed bottom-10 left-10 z-50">
+        <a href="#top" class="">
+          <Top/>
+        </a>
+      </div>
     <a href="/" class="font-coiny text-orange-100 text-4xl">Miaullywood</a>
     <div class="flex justify-center gap-10 mt-10">
         <Twit/>
@@ -14,3 +20,27 @@ import Twit from '../assets/icons/twitter.svg'
     <p class="font-comfortaa text-xs mt-10 text-orange-100">Projet réalisé dans le cadre d’un exercice pédagogique au département MMI de Montbéliard</p>
     <p class="font-comfortaa text-xs mt-5 text-orange-100">Fait par Mathis Guellati</p>
 </footer>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const footer = document.querySelector('footer'); // Sélecteur de votre footer
+      const scrollTopBtn = document.getElementById('scrollTopContainer');
+      
+      if (footer && scrollTopBtn) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            // Quand le footer devient visible
+            if (entry.isIntersecting) {
+              scrollTopBtn.classList.remove('fixed');
+              scrollTopBtn.classList.add('absolute');
+            } else {
+              scrollTopBtn.classList.remove('absolute');
+              scrollTopBtn.classList.add('fixed');
+            }
+          });
+        }, { threshold: 0 });
+        
+        observer.observe(footer);
+      }
+    });
+  </script>

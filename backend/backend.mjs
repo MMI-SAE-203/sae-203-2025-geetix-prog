@@ -56,6 +56,16 @@ export async function allFilmSorted() {
   }
 }
 
+export async function getInviteByRole(role) {
+  const inviteRole = await pb.collection('Invite').getFullList({
+      filter: `role = '${role}'`,
+  });
+  inviteRole.forEach((invite) => {
+      invite.img = pb.files.getURL(invite, invite.photo);
+  });
+  return inviteRole;  
+}
+
 export async function ActeurReaSorted() {
     let record = await pb.collection("Invite").getFullList({
         filter: 'role = "acteur" || role = "realisateur"',
