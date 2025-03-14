@@ -1,5 +1,5 @@
 import PocketBase from 'pocketbase' ;
-const pb = new PocketBase("https://miaullywood-sae.mathis-guellati.fr:443") ;
+const pb = new PocketBase("https://miaullywood-snpmae.mathis-guellati.fr:443") ;
 
 export function getDayName(dateString) {
     const date = new Date(dateString);
